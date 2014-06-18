@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Grape Leaf Procrustes Analysis</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+    </head>
+    <body>
+   		<div id="viz"></div>	
+        <script type="text/javascript">
+		
+        	d3.csv("altered.csv", function(data) {
+        
+        
+        			var canvas = d3.select("#viz")
+        				.append("svg")
+        				.attr("width", 1000)
+						.attr("height", 1000)
+
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+//T: Text
+////////////////////
+////////////////////
+////////////////////
+////////////////////  
+
+       				canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",530)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("Variety:");
+
+       				canvas.selectAll("cultivar")
+        				.data(data)
+        					.enter()
+        					.append("text")
+        					.attr("x",535)
+       						.attr("y",530)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "none")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.attr("id", function(d, i) { return "cultivar-" + i; })
+        					.text(function (d) {return d.cultivar;});
+        					
+        			canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",560)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("Type:");
+
+       				canvas.selectAll("type")
+        				.data(data)
+        					.enter()
+        					.append("text")
+        					.attr("x",535)
+       						.attr("y",560)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "none")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.attr("id", function(d, i) { return "type-" + i; })
+        					.text(function (d) {return d.vinif_type;});
+        					
+        					
+        			canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",590)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("Country:");
+
+       				canvas.selectAll("country")
+        				.data(data)
+        					.enter()
+        					.append("text")
+        					.attr("x",535)
+       						.attr("y",590)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "none")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.attr("id", function(d, i) { return "country-" + i; })
+        					.text(function (d) {return d.country_sean;});
+        					
+        		canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",620)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("USDA ID:");
+
+       				canvas.selectAll("usda")
+        				.data(data)
+        					.enter()
+        					.append("text")
+        					.attr("x",535)
+       						.attr("y",620)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "none")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.attr("id", function(d, i) { return "usda-" + i; })
+        					.text(function (d) {return d.dvit;});
+        					
+        					
+
+
+
+
+
+
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+//C: OVERALL GRAPE LEAF INFO
+////////////////////
+////////////////////
+////////////////////
+////////////////////       
+        					
+        	
+        					
+         	var InfoFirstScale = 0.3
+			var InfoXD = 600
+			var InfoYD = 340
+			var Infostroke = "rgba(250,250,250,0.01)"
+			var Infostrokewidth = 2
+			
+       				canvas.selectAll("C1_10")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x1_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y1_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x10_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y10_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C1_10-" + i; })
+        					.attr("class", function(d, i) { return "cC1_10"; });
+        					//.attr("transform", function(d, i) {return "scale("+ScaleVAR+")";});
+        					
+        			canvas.selectAll("C10_8")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x10_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y10_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x8_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y8_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C10_8-" + i; })
+        					.attr("class", function(d, i) { return "cC10_8"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C8_6")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x8_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y8_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x6_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y6_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C8_6-" + i; })
+        					.attr("class", function(d, i) { return "cC8_6"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C6_4")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x6_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y6_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x4_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y4_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C6_4-" + i; })
+        					.attr("class", function(d, i) { return "cC6_4"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C4_2")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x4_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y4_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x2_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y2_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C4_2-" + i; })
+        					.attr("class", function(d, i) { return "cC4_2"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C2_3")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x2_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y2_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x3_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y3_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C2_3-" + i; })
+        					.attr("class", function(d, i) { return "cC2_3"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C3_5")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x3_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y3_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x5_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y5_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C3_5-" + i; })
+        					.attr("class", function(d, i) { return "cC3_5"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C5_7")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x5_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y5_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x7_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y7_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C5_7-" + i; })
+        					.attr("class", function(d, i) { return "cC5_7"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C7_9")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x7_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y7_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x9_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y9_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C7_9-" + i; })
+        					.attr("class", function(d, i) { return "cC7_9"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});
+        					
+        			canvas.selectAll("C9_1")
+        				.data(data)
+        					.enter()
+        					.append("line")
+        					.attr("x1", function (d) {return (+d.x9_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y1", function (d) {return (-d.y9_mean*InfoFirstScale) + InfoYD;} )
+        					.attr("x2", function (d) {return (+d.x1_mean*InfoFirstScale) + InfoXD;} )
+        					.attr("y2", function (d) {return (-d.y1_mean*InfoFirstScale) + InfoYD;} )
+        					.style("stroke", Infostroke)
+        					.style("stroke-width", Infostrokewidth)
+        					.attr("id", function(d, i) { return "C9_1-" + i; })
+        					.attr("class", function(d, i) { return "cC9_1"; });
+        					//.attr("transform", function(d, i) {return "scale("+LeafLineScale+")";});    
+ 
+ 
+ ////////////////////
+////////////////////
+////////////////////
+////////////////////
+//D: Procrustes PC GRAPH
+////////////////////
+////////////////////
+////////////////////
+////////////////////         					  					
+
+			var ProcXD = 200
+			var ProcYD = 700
+			var NormalRadius =3
+			var ProcXFirstScale = 0.485406055
+			var ProcYFirstScale = 0.514530548
+			var Eastcolor = "rgba(117,112,179,0.3)"
+			var Westcolor = "rgba(27,158,119,0.3)"
+			var Centralcolor = "rgba(217,95,2,0.3)"
+			var NAcolor = "rgba(100,100,100,0.3)"
+			var FinalXProcDisplacement = 0
+			var FinalYProcDisplacement = 0
+			var FinalProcScale = 1
+
+       				canvas.selectAll("D")
+        				.data(data)
+        					.enter()
+        					.append("circle")
+        					.attr("cx", function (d) {return +d.oPC1_mean*ProcXFirstScale + ProcXD;} )
+        					.attr("cy", function (d) {return -d.oPC2_mean*ProcYFirstScale + ProcYD;} )
+        					.attr("r", NormalRadius)
+        					.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})     
+        					 .attr("stroke-width", function(d) {
+        						if (d.vinif_type=="table") {return 2}
+        						else {return 0}
+        						;})     
+        					.attr("id", function(d, i) { return "D-" + i; })
+        					.attr("class", function(d, i) { return "cD"; })
+        					.on("mouseover", functionPROCmouseover)
+        					.on("mouseout", functionPROCmouseout);
+ 
+ 
+ 					//X axis
+ 					canvas.append("line")
+        					.attr("x1",function (d) {return -279.8015772*ProcXFirstScale + ProcXD;} )
+        					.attr("y1",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+        					.attr("x2",function (d) {return 338.237685*ProcXFirstScale + ProcXD;} )
+        					.attr("y2",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+        					.attr("stroke", "black")
+        					.attr("stroke-width", 1)
+        					
+        			//Y axis
+ 					canvas.append("line")
+        					.attr("x1",function (d) {return -279.8015772*ProcXFirstScale + ProcXD;} )
+        					.attr("y1",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+        					.attr("x2",function (d) {return -279.8015772*ProcXFirstScale + ProcXD;} )
+        					.attr("y2",function (d) {return -278.3055265*ProcYFirstScale + ProcYD;} )
+        					.attr("stroke", "black")
+        					.attr("stroke-width", 1)
+        		
+        		
+        		//Graph title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-279.8015772+338.237685)/2)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return -360*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "16px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","bold")
+        					.style("font-style","italic")
+        					.text("Procrustes analysis of shape");
+        								
+        		//X axis title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-279.8015772+338.237685)/2)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Procrustes Principal Component 1");
+        					
+        					
+        		//Y axis title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-279.8015772+338.237685)/2)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Procrustes Principal Component 2")
+        					.attr("transform", function(d, i) {return "translate(-851,915) rotate(-90,0,0)";});
+        					
+        		//X axis "-200"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-200)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-200");
+        					
+        					
+        		//X axis "-100"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-100)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-100");
+        					
+        		//X axis "0"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (0)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0"); 
+        					
+        					
+        		//X axis "100"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (100)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("100");
+        					
+        					
+        	//X axis "200"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (200)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 304.7502341*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("200");                                               
+     
+            //Y axis "-200"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-310)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 200*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-200");
+        					
+        	//Y axis "-100"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-310)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 100*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-100");
+        					
+        					
+        //Y axis "00"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-310)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return 0*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0");
+        					
+        					
+       //Y axis "100"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-310)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return -100*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("100");
+        					
+        					
+        //Y axis "200"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-310)*ProcXFirstScale + ProcXD;} )
+       						.attr("y",function (d) {return -200*ProcYFirstScale + ProcYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("200");
+
+
+        			
+        			
+        			
+        			
+        			
+        			
+        			
+        					
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+//E: Genetic PC GRAPH
+////////////////////
+////////////////////
+////////////////////
+////////////////////   
+
+
+			var GenXD = 254
+			var GenYD =280
+			var GenXFirstScale =1545.595054
+			var GenYFirstScale = 1363.016811
+			
+			
+
+       				canvas.selectAll("E")
+        				.data(data)
+        					.enter()
+        					.append("circle")
+        					.attr("cx", function (d) {return +d.genoPC1*GenXFirstScale + GenXD;} )
+        					.attr("cy", function (d) {return -d.genoPC2*GenYFirstScale + GenYD;} )
+        					.attr("r", NormalRadius)
+        					 .attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})     
+        					 .attr("stroke-width", function(d) {
+        						if (d.vinif_type=="table") {return 2}
+        						else {return 0}
+        						;})     
+        					.attr("id", function(d, i) { return "E-" + i; })
+        					.attr("class", function(d, i) { return "cE"; })
+        					//.attr("transform", function(d, i) {return "scale("+ScaleVAR+")";})
+        					.on("mouseover", functionGENOmouseover)
+        					.on("mouseout", functionGENOmouseout);
+
+
+        		 //X axis
+ 					canvas.append("line")
+        					.attr("x1",function (d) {return -0.1226*GenXFirstScale + GenXD;} )
+        					.attr("y1",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+        					.attr("x2",function (d) {return 0.0715*GenXFirstScale + GenXD;} )
+        					.attr("y2",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+        					.attr("stroke", "black")
+        					.attr("stroke-width", 1);
+        		
+        		
+        		
+        		 //Y axis
+ 					canvas.append("line")
+        					.attr("x1",function (d) {return -0.1226*GenXFirstScale + GenXD;} )
+        					.attr("y1",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+        					.attr("x2",function (d) {return -0.1226*GenXFirstScale + GenXD;} )
+        					.attr("y2",function (d) {return -0.0846*GenYFirstScale + GenYD;} )
+        					.attr("stroke", "black")
+        					.attr("stroke-width", 1);
+  
+  
+          		 
+        		 //Graph title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-0.1226+0.0715)/2)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return -0.11*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "16px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","bold")
+        					.style("font-style","italic")
+        					.text("Population structure"); 
+        					
+        					      		 
+        		 //X axis title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-0.1226+0.0715)/2)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Genotypic Principal Component 1"); 
+        					
+        					
+        		//Y axis title			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return ((-0.1226+0.0715)/2)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",30)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "middle")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Genotypic Principal Component 2")
+        					.attr("transform", function(d, i) {return "translate(-460,525) rotate(-90,0,0)";})
+        					
+        					
+        		//X axis "-0.10"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.10)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-0.10");
+        					
+        					
+        		//X axis "-0.05"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.05)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-0.05"); 
+        					
+        		//X axis "0"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (0)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0");
+        					
+        		//X axis "0.05"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (0.05)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return 0.1355*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0.05");
+        					
+        					
+        	//Y axis "-0.10"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.14)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return (0.10)*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-0.10");
+        					
+      	//Y axis "-0.05"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.14)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return (0.05)*GenYFirstScale + GenYD;} )
+       						.attr("dx",0)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("-0.05");   
+        					   					
+        	//Y axis "0"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.14)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return (0)*GenYFirstScale + GenYD;} )
+       						.attr("dx",10)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0");
+        					
+        	//Y axis "0.05"			
+       				 canvas.append("text")
+     						.attr("x",function (d) {return (-0.14)*GenXFirstScale + GenXD;} )
+       						.attr("y",function (d) {return (-0.05)*GenYFirstScale + GenYD;} )
+       						.attr("dx",3)
+       						.attr("dy",12)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "10px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("0.05"); 
+                           
+                      
+
+        
+        
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+//FUNCTION FOR GENO
+////////////////////
+////////////////////
+////////////////////
+////////////////////   	
+        		
+        		
+        		
+        var OverRadius = 10
+        var OverEastcolor = "rgba(117,112,179,1)"
+		var OverWestcolor = "rgba(27,158,119,1)"
+		var OverCentralcolor = "rgba(217,95,2,1)"
+		var OverNAcolor = "rgba(100,100,100,1)"
+		var OverStroke = "rgba(0,0,0,1)"
+		var Dur = 150
+
+        		
+        		function functionGENOmouseover(d,i) {
+        			
+        			d3.select(this)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", OverRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})
+        						
+        						
+        			d3.select("#D-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", OverRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})
+        			 
+		
+        			d3.select("#cultivar-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        				
+        			d3.select("#type-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        			d3.select("#country-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        			d3.select("#usda-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")							
+        						
+        			d3.select("#C1_10-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C10_8-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)			
+        				
+        			d3.select("#C8_6-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        								
+        			d3.select("#C6_4-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C4_2-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C2_3-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C3_5-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C5_7-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C7_9-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C9_1-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        				
+        		};
+        		
+        		
+        		function functionGENOmouseout(d,i) {
+        			
+        			d3.select(this)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", NormalRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})
+        						
+        						
+        		d3.select("#D-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", NormalRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})
+
+        			d3.select("#cultivar-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        				
+        			d3.select("#type-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        			d3.select("#country-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        			d3.select("#usda-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")		
+        						
+        			d3.select("#C1_10-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)
+        				
+        			d3.select("#C10_8-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C8_6-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C6_4-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C4_2-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C2_3-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)  
+        				
+        			d3.select("#C3_5-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C5_7-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C7_9-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C9_1-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)
+        				
+    
+        				
+        		};
+        		
+        		
+////////////////////
+////////////////////
+////////////////////
+////////////////////
+//FUNCTION FOR PROC
+////////////////////
+////////////////////
+////////////////////
+////////////////////   	        
+        		
+        		
+        		
+                		function functionPROCmouseover(d,i) {
+        			
+        			d3.select(this)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", OverRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})
+        						
+        			d3.select("#E-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", OverRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return OverEastcolor}
+        						else if (d.east_west=="west") {return OverWestcolor}
+        						else if (d.east_west=="central") {return OverCentralcolor}
+        						else {return OverNAcolor}
+        						;})
+        						
+        					
+        						
+        			d3.select("#C1_10-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C10_8-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)			
+        				
+        			d3.select("#C8_6-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        								
+        			d3.select("#C6_4-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C4_2-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C2_3-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C3_5-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C5_7-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C7_9-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        			d3.select("#C9_1-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", OverStroke)
+        				
+        				
+        		};
+        		
+        		
+        		function functionPROCmouseout(d,i) {
+        			
+        			d3.select(this)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", NormalRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})
+        						
+        						
+        		d3.select("#E-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.attr("r", NormalRadius)
+        				.attr("fill", function(d) {
+        						if (d.vinif_type=="table") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})        					
+        					.attr("stroke", function(d) {
+        						if (d.vinif_type=="wine") {return "rgba(255,255,255,0)"}
+        						else if (d.east_west=="east") {return Eastcolor}
+        						else if (d.east_west=="west") {return Westcolor}
+        						else if (d.east_west=="central") {return Centralcolor}
+        						else {return NAcolor}
+        						;})
+
+        						
+        						
+        			d3.select("#C1_10-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)
+        				
+        			d3.select("#C10_8-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C8_6-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C6_4-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C4_2-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)    
+        				
+        			d3.select("#C2_3-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)  
+        				
+        			d3.select("#C3_5-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C5_7-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C7_9-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)   
+        				
+        			d3.select("#C9_1-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("stroke", Infostroke)
+        				
+    
+        				
+        		};
+		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+//Instructions
+	canvas.append("text")
+     	.attr("x",20)
+       	.attr("y",20)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "24px")
+        .style("text-anchor", "start")
+        .style("font-weight","bold")
+        .style("font-style","normal")
+        .text("Visualizing the morpho-genetic space of")
+        
+canvas.append("text")
+     	.attr("x",20)
+       	.attr("y",50)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "24px")
+        .style("text-anchor", "start")
+        .style("font-weight","bold")
+        .style("font-style","normal")
+        .text("domesticated grape leaves ("); 
+
+canvas.append("text")
+     	.attr("x",340)
+       	.attr("y",50)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "24px")
+        .style("text-anchor", "start")
+        .style("font-weight","bold")
+        .style("font-style","italic")
+        .text("Vitis vinifera");               	
+        		
+canvas.append("text")
+     	.attr("x",488)
+       	.attr("y",50)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "24px")
+        .style("text-anchor", "start")
+        .style("font-weight","bold")
+        .style("font-style","normal")
+        .text(")");
+        
+        
+canvas.append("text")
+     	.attr("x",20)
+       	.attr("y",90)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "18px")
+        .style("text-anchor", "start")
+        .style("font-weight","bold")
+        .style("font-style","italic")
+        .text("Hover!");  
+        
+canvas.append("text")
+     	.attr("x",82)
+       	.attr("y",90)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "18px")
+        .style("text-anchor", "start")
+        .style("font-weight","normal")
+        .style("font-style","italic")
+        .text("over points to explore");
+        
+        
+canvas.append("text")
+     	.attr("x",20)
+       	.attr("y",110)
+       	.attr("dx",0)
+       	.attr("dy",0)
+        .attr("fill", "black")
+        .attr("font-family", "sans-serif")
+       	.attr("font-size", "18px")
+        .style("text-anchor", "start")
+        .style("font-weight","normal")
+        .style("font-style","italic")
+        .text("different grape varieties"); 
+        
+        
+						canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",700)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "18px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("References:");
+        					
+        					
+        canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",730)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Chitwood et al. (2014)");
+        
+        
+                canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",750)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("A modern ampelography: a genetic basis");
+        					
+        	canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",770)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("for leaf shape and venation patterning in grape");
+        					
+        					
+        	canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",790)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Plant Physiology 164: 259-72");
+        					
+  
+        
+                canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",825)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Myles et al. (2011)");
+        					
+        		canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",845)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("Genetic structure and domestication history");
+        					
+        					
+        	canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",865)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("of the grape");
+        					
+        					
+        	canvas.append("text")
+        					.attr("x",450)
+       						.attr("y",885)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Proc Natl Acad Sci USA 108: 3530-5");
+        					
+        	canvas.append("text")
+        					.attr("x",62)
+       						.attr("y",910)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "14px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","bold")
+        					.style("font-style","normal")
+        					.text("Legend:");
+        					
+        	canvas.append("circle")
+        					.attr("cx",67)
+       						.attr("cy",927)
+       						.attr("r", 6)
+       						.attr("fill", OverWestcolor)
+       						
+       						
+       		canvas.append("text")
+        					.attr("x",77)
+       						.attr("y",932)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Western variety");
+        					
+        	canvas.append("circle")
+        					.attr("cx",67)
+       						.attr("cy",947)
+       						.attr("r", 6)
+       						.attr("fill", OverEastcolor)
+       						
+       		canvas.append("text")
+        					.attr("x",77)
+       						.attr("y",952)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Eastern variety");
+        					
+        	canvas.append("circle")
+        					.attr("cx",185)
+       						.attr("cy",927)
+       						.attr("r", 6)
+       						.attr("fill", OverCentralcolor)
+       						
+       		canvas.append("text")
+        					.attr("x",195)
+       						.attr("y",932)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Central variety");
+        					
+        					
+        	canvas.append("circle")
+        					.attr("cx",185)
+       						.attr("cy",947)
+       						.attr("r", 6)
+       						.attr("fill", OverNAcolor)
+       						
+       		canvas.append("text")
+        					.attr("x",195)
+       						.attr("y",952)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("NA variety");
+        					
+        					
+        	canvas.append("circle")
+        					.attr("cx",303)
+       						.attr("cy",927)
+       						.attr("r", 6)
+       						.attr("fill", "black")
+       						
+       		canvas.append("text")
+        					.attr("x",313)
+       						.attr("y",932)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Wine grape");
+        					
+        					
+        	canvas.append("circle")
+        					.attr("cx",303)
+       						.attr("cy",947)
+       						.attr("r", 6)
+       						.attr("fill", "none")
+       						.attr("stroke", "black")
+       						.attr("stroke-width", 2)
+       						
+       		canvas.append("text")
+        					.attr("x",313)
+       						.attr("y",952)
+       						.attr("dx",0)
+       						.attr("dy",0)
+        					.attr("fill", "black")
+        					.attr("font-family", "sans-serif")
+       						.attr("font-size", "13px")
+        					.style("text-anchor", "start")
+        					.style("font-weight","normal")
+        					.style("font-style","normal")
+        					.text("Table grape");
+        					
+
+        
+
+        		
+        		
+        		
+        		
+       		});
+        
+            
+        </script>
+   
+    </body>
+</html>

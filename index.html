@@ -1129,6 +1129,27 @@
         						else {return OverNAcolor}
         						;})
         						
+        						        			d3.select("#cultivar-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        				
+        			d3.select("#type-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        			d3.select("#country-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")	
+        				
+        			d3.select("#usda-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "black")					
+        						
         					
         						
         			d3.select("#C1_10-"+i)
@@ -1226,7 +1247,26 @@
         						else {return NAcolor}
         						;})
 
-        						
+        			        			d3.select("#cultivar-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        				
+        			d3.select("#type-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        			d3.select("#country-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")	
+        				
+        			d3.select("#usda-"+i)
+        				.transition()
+        				.duration(Dur)
+        				.style("fill", "none")					
         						
         			d3.select("#C1_10-"+i)
         				.transition()
